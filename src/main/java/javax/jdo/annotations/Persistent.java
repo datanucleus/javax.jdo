@@ -200,25 +200,31 @@ public @interface Persistent
      */
     String name() default ""; 
 
-    /** Recursion depth for this member. Used only when
+    /**
+     * Recursion depth for this member. Used only when
      * the annotation is used within the definition of a FetchGroup.
      * @return the recursion depth
      */
     int recursionDepth() default 1;
 
-    /** Whether this field/property is cacheable in a Level2 cache.
+    /**
+     * Whether this field/property is cacheable in a Level2 cache.
+     * @return Whether the field is L2 cacheable
      * @since 2.2
      */
     String cacheable() default "true";
 
 	/**
 	 * Optional {@link AttributeConverter} to use for converting this member.
+	 * @return Converter class for converting this member when not PersistenceCapable
+	 *   (or NullAttributeConverter when not specified).
 	 */
 	@SuppressWarnings("rawtypes")
 	Class<? extends AttributeConverter> converter() default NullAttributeConverter.class;
 
 	/**
-	 * Whether we should disable any conversion specified at the PMF level (where converter is not specified).
+	 * Whether we should disable any converter that was specified as default for this type on the PMF.
+	 * If the converter is specified on this annotation then this is ignored
 	 * @return Whether PMF attribute conversion is to be disabled.
 	 */
 	boolean disableConversion() default false;

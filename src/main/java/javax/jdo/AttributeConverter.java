@@ -32,11 +32,15 @@ public interface AttributeConverter<A, D> {
 
     /**
      * Converts the given persistent attribute value to its representation in the datastore.
+     * @param attributeValue Value of attribute
+     * @return Value in datastore
      */
     D convertToDatastore(A attributeValue);
 
     /**
      * Converts the given datastore value to its representation as a persistent attribute.
+     * @param datastoreValue Value in datastore
+     * @return Value in attribute
      */
     A convertToAttribute(D datastoreValue);
 

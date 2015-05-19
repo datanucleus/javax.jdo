@@ -141,17 +141,20 @@ public @interface Key
 
 	/**
 	 * Optional {@link AttributeConverter} to use for converting this key.
+	 * @return Optional converter class for converting this key (when non-PersistenceCapable)
 	 */
 	@SuppressWarnings("rawtypes")
 	Class<? extends AttributeConverter> converter() default NullAttributeConverter.class;
 
 	/**
-	 * Whether we should disable any conversion specified at the PMF level (where converter is not specified).
+	 * Whether we should disable any converter that was specified as default for this type on the PMF.
+	 * If the converter is specified on this annotation then this is ignored
 	 * @return Whether PMF attribute conversion is to be disabled.
 	 */
 	boolean disableConversion() default false;
 
-    /** Vendor extensions.
+    /** 
+     * Vendor extensions.
      * @return the vendor extensions
      */
     Extension[] extensions() default {};

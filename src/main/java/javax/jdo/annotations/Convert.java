@@ -40,6 +40,7 @@ public @interface Convert {
 
 	/**
 	 * The {@link AttributeConverter} to use for conversion.
+	 * @return Converter class to use
 	 */
 	@SuppressWarnings("rawtypes")
 	Class<? extends AttributeConverter> value();
@@ -47,6 +48,7 @@ public @interface Convert {
 	/**
 	 * Whether this conversion is enabled. True by default.
 	 * Setting this to false allows disabling conversion that was specified at PMF level.
+	 * @return Whether the PMF default converter is enabled
 	 */
 	boolean enabled() default true;
 }
