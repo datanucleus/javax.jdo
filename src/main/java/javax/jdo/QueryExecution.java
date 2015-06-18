@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Interface defining the methods for executing a query.
  * TODO Do parameters get passed in via these methods ? in which case we have to cater for named params (Map) and numbered params (array? or Map?)
- * @param T Candidate class
+ * @param <T> Candidate class
  */
 public interface QueryExecution<T> {
     /**
