@@ -16,6 +16,8 @@
  */
 package javax.jdo;
 
+import java.io.Closeable;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +43,7 @@ import javax.jdo.query.TimeExpression;
  * Designed to handle JDO query requirements as a whole.
  * @param <T> candidate type for this query
  */
-public interface JDOQLTypedQuery<T>
+public interface JDOQLTypedQuery<T> extends Serializable, Closeable
 {
     public static final String QUERY_CLASS_PREFIX = "Q";
 
@@ -139,13 +141,6 @@ public interface JDOQLTypedQuery<T>
     <V> Expression<V> variable(String name, Class<V> type);
 
     /**
-     * Whether the query should ignore the cache and go straight to the datastore.
-     * @param ignore Ignore the cache flag
-     * @return The query
-     */
-    JDOQLTypedQuery<T> setIgnoreCache(boolean ignore);
-
-    /**
      * Method to set the candidates to use over which we are querying.
      * If no candidates are set then the query is performed on the datastore.
      * @param candidates The candidates
@@ -194,6 +189,14 @@ public interface JDOQLTypedQuery<T>
     JDOQLTypedQuery<T> orderBy(OrderExpression<?>... orderExprs);
 
     /**
+     * Method to set the result of the query.
+     * @param distinct Whether results are distinct
+     * @param exprs The result expressions
+     * @return The query
+     */
+    JDOQLTypedQuery<T> result(boolean distinct, Expression<?>... exprs);
+
+    /**
      * Method to set the range of any required results, using expressions.
      * @param lowerInclExpr The position of the first result (inclusive)
      * @param upperExclExpr The position of the last result (exclusive)
@@ -236,7 +239,22 @@ public interface JDOQLTypedQuery<T>
     <S> JDOQLTypedSubquery<S> subquery(Class<S> candidate, String candidateAlias);
 
     /**
+     * Method to set the named parameters on this query prior to execution.
+     * @param namedParamMap The map of parameter values keyed by their names.
+     * @return This query
+     */
+    JDOQLTypedQuery<T> setParameters(Map namedParamMap);
+
+    /**
+     * Method to set the values of the numbered parameters on this query prior to execution.
+     * @param paramValues Values of the numbered parameters, in order.
+     * @return This query
+     */
+    JDOQLTypedQuery<T> setParameters(Object... paramValues);
+
+    /**
      * Method to set a parameter value for use when executing the query.
+     * TODO Drop this
      * @param paramExpr Parameter expression
      * @param value The value
      * @return The query
@@ -245,6 +263,7 @@ public interface JDOQLTypedQuery<T>
 
     /**
      * Method to set a parameter value for use when executing the query.
+     * TODO Drop this
      * @param paramName Parameter name
      * @param value The value
      * @return The query
@@ -253,30 +272,10 @@ public interface JDOQLTypedQuery<T>
 
     /**
      * Method to clear all parameter values.
+     * TODO Drop this
      * @return The query
      */
     JDOQLTypedQuery<T> clearParameters();
-
-    /**
-     * Add a vendor-specific extension to this query. The key and value are not standard.
-     * An implementation must ignore keys that are not recognized.
-     * @param key the key of the extension
-     * @param value the value of the extension
-     * @return The query
-     */
-    JDOQLTypedQuery<T> addExtension (String key, Object value);
-
-    /**
-     * Set multiple extensions, or use null to clear all extensions. Map keys and values are not standard.
-     * @param extensions the map of extensions
-     * @return The query
-     * @see #addExtension
-     */
-    JDOQLTypedQuery<T> setExtensions (Map<String, Object> extensions);
-
-
-
-    // Everything below here needs modification to fit in with JDO-652 and discussions on QueryExecution
 
     /**
      * Method to execute the query where there are (potentially) multiple rows and we are returning
@@ -295,65 +294,135 @@ public interface JDOQLTypedQuery<T>
      * Method to execute the query where there are (potentially) multiple rows and we are returning either a
      * result type or the candidate type.
      * @param resultCls Result class
-     * @param distinct Whether to provide distinct results
-     * @param exprs Result expression(s)
      * @return The results
      * @param <R> result type
      */
-    <R> List<R> executeResultList(Class<R> resultCls, boolean distinct, Expression<?>... exprs);
+    <R> List<R> executeResultList(Class<R> resultCls);
 
     /**
      * Method to execute the query where there is a single row and we are returning either a result type
      * or the candidate type.
      * @param resultCls Result class
-     * @param distinct Whether to provide distinct results
-     * @param exprs Result expression(s)
      * @return The result
      * @param <R> result type
      */
-    <R> R executeResultUnique(Class<R> resultCls, boolean distinct, Expression<?>... exprs);
-
-    /**
-     * Method to execute the query where there are (potentially) multiple rows and we have a single result defined
-     * but no result class.
-     * @param distinct Whether to provide distinct results
-     * @param expr Result expression
-     * @return The results
-     */
-    List<Object> executeResultList(boolean distinct, Expression<?> expr);
-
-    /**
-     * Method to execute the query where there is a single row and we have a single result defined
-     * but no result class.
-     * @param distinct Whether to provide distinct results
-     * @param expr Result expression
-     * @return The results
-     */
-    Object executeResultUnique(boolean distinct, Expression<?> expr);
+    <R> R executeResultUnique(Class<R> resultCls);
 
     /**
      * Method to execute the query where there are (potentially) multiple rows and we have a result defined
      * but no result class.
-     * @param distinct Whether to provide distinct results
-     * @param exprs Result expression(s)
      * @return The results
      */
-    List<Object[]> executeResultList(boolean distinct, Expression<?>... exprs);
+    List<Object> executeResultList();
 
     /**
      * Method to execute the query where there is a single row and we have a result defined
      * but no result class.
-     * @param distinct Whether to provide distinct results
-     * @param exprs Result expression(s)
      * @return The results
      */
-    Object[] executeResultUnique(boolean distinct, Expression<?>... exprs);
+    Object executeResultUnique();
 
     /**
      * Method to execute the query deleting the affected instances.
      * @return The number of objects deleted
      */
     long deletePersistentAll();
+
+    /**
+     * Get the effective timeout setting for read operations.
+     * If the timeout has not been set on this query explicitly, the effective
+     * datastore read timeout value from the persistence manager is returned.
+     * @see PersistenceManager#setDatastoreReadTimeoutMillis(Integer)
+     * @return the effective timeout setting (milliseconds).
+     */
+    Integer getDatastoreReadTimeoutMillis();
+
+    /**
+     * Set the datastore read timeout (millis).
+     * @param interval The interval
+     * @return This query
+     */
+    JDOQLTypedQuery<T> datastoreReadTimeoutMillis(Integer interval);
+
+    /**
+     * Get the effective timeout setting for write operations. 
+     * If the timeout has not been set on this query explicitly, the effective
+     * datastore write timeout value from the persistence manager is returned.
+     * @see PersistenceManager#setDatastoreWriteTimeoutMillis(Integer)
+     * @return the effective timeout setting (milliseconds).
+     */
+    Integer getDatastoreWriteTimeoutMillis();
+
+    /**
+     * Set the datastore write timeout (millis).
+     * @param interval The interval
+     * @return This query
+     */
+    JDOQLTypedQuery<T> datastoreWriteTimeoutMillis(Integer interval);
+
+    /**
+     * Return the current value of the serializeRead property.
+     * @return the value of the serializeRead property
+     */
+    Boolean getSerializeRead();
+
+    /**
+     * Set whether we to lock all objects read by this query.
+     * @param serialize Whether to lock
+     * @return This query
+     */
+    JDOQLTypedQuery<T> serializeRead(Boolean serialize);
+
+    /**
+     * The unmodifiable flag, when set, disallows further modification of the query, 
+     * except for specifying the range, result class, and ignoreCache option.
+     * @return the current setting of the flag
+     */
+    boolean isUnmodifiable();
+
+    /**
+     * Set to make this query unmodifiable hereafter.
+     * @return This query
+     */
+    JDOQLTypedQuery<T> unmodifiable();
+    
+    /**
+     * Get the ignoreCache option setting.
+     * @return the ignoreCache option setting.
+     * @see #setIgnoreCache
+     */
+    boolean getIgnoreCache();
+
+    /**
+     * Set whether we to ignore the cache with this query.
+     * @param flag Whether to ignore the cache
+     * @return This query
+     */
+    JDOQLTypedQuery<T> ignoreCache(boolean flag);
+
+    /**
+     * Specify an extension for this query.
+     * @param key The extension key
+     * @param value The extension value
+     * @return This query
+     */
+    JDOQLTypedQuery<T> extension(String key, Object value);
+
+    /**
+     * Specify a map of extensions for this query.
+     * @param values The extension map of keys and values
+     * @return This query
+     */
+    JDOQLTypedQuery<T> extensions(Map values);
+
+    /**
+     * Save the query, as it is currently defined, as a named query under the specified name.
+     * If a named query already exists under this name (either defined in metadata, or previously saved)
+     * then it will be overwritten.
+     * @param name Name to save it under.
+     * @return This query
+     */
+    JDOQLTypedQuery<T> saveAsNamedQuery(String name);
 
     /**
      * Accessor for the PersistenceManager for this query
@@ -366,6 +435,21 @@ public interface JDOQLTypedQuery<T>
      * @return The FetchPlan
      */
     FetchPlan getFetchPlan();
+
+    /**
+     * Method to cancel any executing queries.
+     * If the underlying datastore doesn't support cancellation of queries this will throw JDOUnsupportedOptionException.
+     * If the cancellation fails (e.g in the underlying datastore) then this will throw a JDOException.
+     */
+    void cancelAll();
+
+    /**
+     * Method to cancel an executing query in the specified thread.
+     * If the underlying datastore doesn't support cancellation of queries this will throw JDOUnsupportedOptionException.
+     * If the cancellation fails (e.g in the underlying datastore) then this will throw a JDOException.
+     * @param thread The thread to cancel
+     */
+    void cancel(Thread thread);
 
     /**
      * Method to close the specified query result.
