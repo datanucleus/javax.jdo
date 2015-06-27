@@ -982,7 +982,7 @@ public interface Query<T> extends AutoCloseable, Serializable {
      * @param namedParamMap The map of parameter values keyed by their names.
      * @return This query
      */
-    Query<T> setParameters(Map<String, ?> namedParamMap);
+    Query<T> setNamedParameters(Map<String, ?> namedParamMap);
 
     /**
      * Method to set the values of the numbered parameters on this query prior to execution.

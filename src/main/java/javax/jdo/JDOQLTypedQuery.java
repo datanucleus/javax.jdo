@@ -243,7 +243,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param namedParamMap The map of parameter values keyed by their names.
      * @return This query
      */
-    JDOQLTypedQuery<T> setParameters(Map namedParamMap);
+    JDOQLTypedQuery<T> setNamedParameters(Map<String, ?> namedParamMap);
 
     /**
      * Method to set a parameter value for use when executing the query.
