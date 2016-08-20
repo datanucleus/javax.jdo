@@ -19,14 +19,13 @@
  * Extent.java
  *
  */
-
 package javax.jdo;
 
 import java.lang.Iterable;
 import java.util.Iterator;
 
-/** Instances of the <code>Extent</code> class represent the entire collection
- * of instances in the data store of the candidate class or interface
+/**
+ * Instances of the <code>Extent</code> class represent the entire collection of instances in the data store of the candidate class or interface
  * possibly including its subclasses or subinterfaces.
  * <P>The <code>Extent</code> instance has two possible uses:
  * <ol>
@@ -34,57 +33,54 @@ import java.util.Iterator;
  * <li>to execute a <code>Query</code> in the data store over all instances
  * of a particular class or interface
  * </ol>
- * @version 2.1
  */
-public interface Extent<E> extends Iterable<E> {
-        
-    /** Returns an iterator over all the instances in the <code>Extent</code>.
-     * The behavior of the returned iterator might depend on the setting of the
-     * <code>ignoreCache</code> flag in the owning <code>PersistenceManager</code>.
+public interface Extent<E> extends AutoCloseable, Iterable<E> {
+
+    /**
+     * Returns an iterator over all the instances in the <code>Extent</code>.
+     * The behaviour of the returned iterator might depend on the setting of the <code>ignoreCache</code> flag in the owning <code>PersistenceManager</code>.
      * @return an iterator over all instances in the <code>Extent</code>
      */
     Iterator<E> iterator();
 
-    /** Returns whether this <code>Extent</code> was defined to contain subclasses.
-     * @return true if this <code>Extent</code> was defined to contain instances
-     * that are of a subclass type.
+    /**
+     * Returns whether this <code>Extent</code> was defined to contain subclasses.
+     * @return true if this <code>Extent</code> was defined to contain instances that are of a subclass type.
      */    
     boolean hasSubclasses();
 
-    /** An <code>Extent</code> contains all instances of a particular class 
-     * or interface in the data
-     * store; this method returns the <code>Class</code> of the instances
-     * represented by this Extent.
-      * @return the <code>Class</code> of instances of this <code>Extent</code>.
-      */
+    /**
+     * An <code>Extent</code> contains all instances of a particular class or interface in the data
+     * store; this method returns the <code>Class</code> of the instances represented by this Extent.
+     * @return the <code>Class</code> of instances of this <code>Extent</code>.
+     */
     Class<E> getCandidateClass();
 
-    /** An <code>Extent</code> is managed by a <code>PersistenceManager</code>;
+    /**
+     * An <code>Extent</code> is managed by a <code>PersistenceManager</code>;
      * this method gives access to the owning <code>PersistenceManager</code>.
      * @return the owning <code>PersistenceManager</code>
      */
     PersistenceManager getPersistenceManager();
-    
-    /** Close all <code>Iterator</code>s associated with this <code>Extent</code> instance.
-     * <code>Iterator</code>s closed by this method will return <code>false</code>
-     * to <code>hasNext()</code> and will throw
+
+    /**
+     * Close all <code>Iterator</code>s associated with this <code>Extent</code> instance.
+     * <code>Iterator</code>s closed by this method will return <code>false</code> to <code>hasNext()</code> and will throw
      * <code>NoSuchElementException</code> on <code>next()</code>.
-     * The <code>Extent</code> instance can still be used
-     * as a parameter of <code>Query.setExtent</code>, and to get an <code>Iterator</code>.
+     * The <code>Extent</code> instance can still be used as a parameter of <code>Query.setExtent</code>, and to get an <code>Iterator</code>.
      */    
-    void closeAll ();
-    
-    /** Close an <code>Iterator</code> associated with this <code>Extent</code> instance.
-     * <code>Iterator</code>s closed by this method will return <code>false</code>
-     * to <code>hasNext()</code> and will throw <code>NoSuchElementException</code>
-     * on <code>next()</code>. The <code>Extent</code> instance can still be used
-     * as a parameter of <code>Query.setExtent</code>, and to get an <code>Iterator</code>.
-     * @param it an <code>Iterator</code> obtained by the method
-     * <code>iterator()</code> on this <code>Extent</code> instance.
-     */    
-    void close (Iterator<E> it);
-    
-    /** Get the fetch plan associated with this Extent.
+    void closeAll();
+
+    /**
+     * Close an <code>Iterator</code> associated with this <code>Extent</code> instance.
+     * <code>Iterator</code>s closed by this method will return <code>false</code> to <code>hasNext()</code> and will throw <code>NoSuchElementException</code> 
+     * on <code>next()</code>. The <code>Extent</code> instance can still be used as a parameter of <code>Query.setExtent</code>, and to get an <code>Iterator</code>.
+     * @param it an <code>Iterator</code> obtained by the method <code>iterator()</code> on this <code>Extent</code> instance.
+     */
+    void close(Iterator<E> it);
+
+    /**
+     * Get the fetch plan associated with this Extent.
      * @return the fetch plan
      * @since 2.0
      */
