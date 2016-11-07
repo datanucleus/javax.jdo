@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>javax.jdo</artifactId>
-    <version>3.2.0-m6</version>
+    <version>3.2.0-m7-SNAPSHOT</version>
 
     <name>JDO API</name>
     <description>The Java Data Objects API (JDO) : a standard interface-based Java model abstraction of persistence, developed by the JCP.</description>
