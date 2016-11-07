@@ -83,7 +83,7 @@ public interface Extent<E> extends AutoCloseable, Iterable<E> {
      * Don't use this method directly; use <code>closeAll()</code> instead. It is intended for use with try-with-resources.
      * @throws Exception if this resource cannot be closed
      */
-    void close();
+    void close() throws Exception;
 
     /**
      * Get the fetch plan associated with this Extent.
