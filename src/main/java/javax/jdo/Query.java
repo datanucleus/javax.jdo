@@ -285,6 +285,12 @@ public interface Query<T> extends AutoCloseable, Serializable {
     void closeAll();
 
     /**
+     * Don't use this method directly; use <code>closeAll()</code> instead. It is intended for use with try-with-resources.
+     * @throws Exception if this resource cannot be closed
+     */
+    void close();
+
+    /**
      * Set the grouping expressions, optionally including a "having" clause. 
      * When grouping is specified, each result expression must either be an expression contained in the grouping, or an aggregate evaluated once per group.
      * @param group a comma-delimited list of expressions, optionally followed by the "having" keyword and a boolean expression
