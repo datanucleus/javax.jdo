@@ -32,82 +32,103 @@ import java.util.Collection;
  */
 public interface DataStoreCache {
 
-    /** Evict the parameter instance from the second-level cache.
+    /**
+     * Evict the parameter instance from the second-level cache.
      * @param oid the object id of the instance to evict.
      * @since 2.0
      */
     void evict (Object oid);
 
-    /** Evict the parameter instances from the second-level cache.
+    /**
+     * Evict the parameter instances from the second-level cache.
      * All instances in the PersistenceManager's cache are evicted 
      * from the second-level cache.
      * @since 2.0
      */
     void evictAll ();
 
-    /** Evict the parameter instances from the second-level cache.
+    /**
+     * Evict the parameter instances from the second-level cache.
      * @param oids the object ids of the instance to evict.
      * @since 2.0
      */
     void evictAll (Object... oids);
 
-    /** Evict the parameter instances from the second-level cache.
+    /**
+     * Evict the parameter instances from the second-level cache.
      * @param oids the object ids of the instance to evict.
      * @since 2.0
      */
     void evictAll (Collection oids);
 
-    /** Evict the parameter instances from the second-level cache.
+    /**
+     * Evict the parameter instances from the second-level cache.
      * @param pcClass the class of instances to evict
      * @param subclasses if true, evict instances of subclasses also
      * @since 2.1
      */
     void evictAll (boolean subclasses, Class pcClass);
 
-    /** Pin the parameter instance in the second-level cache.
+    /**
+     * Pin the parameter instance in the second-level cache.
+     * This is a hint only, and will be ignored if the underlying cache doesn't support it.
      * @param oid the object id of the instance to pin.
      * @since 2.0
      */
     void pin (Object oid);
 
-    /** Pin the parameter instances in the second-level cache.
+    /**
+     * Pin the parameter instances in the second-level cache.
+     * This is a hint only, and will be ignored if the underlying cache doesn't support it.
      * @param oids the object ids of the instances to pin.
      * @since 2.0
      */
     void pinAll (Collection oids);
 
-    /** Pin the parameter instances in the second-level cache.
+    /**
+     * Pin the parameter instances in the second-level cache.
+     * This is a hint only, and will be ignored if the underlying cache doesn't support it.
      * @param oids the object ids of the instances to pin.
      * @since 2.0
      */
     void pinAll (Object... oids);
 
-    /** Pin instances in the second-level cache.
+    /**
+     * Pin instances in the second-level cache.
+     * This is a hint only, and will be ignored if the underlying cache doesn't support it.
      * @param pcClass the class of instances to pin
      * @param subclasses if true, pin instances of subclasses also
      * @since 2.1
      */
     void pinAll (boolean subclasses, Class pcClass);
 
-    /** Unpin the parameter instance from the second-level cache.
+    /**
+     * Unpin the parameter instance from the second-level cache.
+     * This is a hint only, and will be ignored if the underlying cache doesn't support it.
      * @param oid the object id of the instance to unpin.
      * @since 2.0
      */
     void unpin(Object oid);
 
-    /** Unpin the parameter instances from the second-level cache.
+    /**
+     * Unpin the parameter instances from the second-level cache.
+     * This is a hint only, and will be ignored if the underlying cache doesn't support it.
      * @param oids the object ids of the instance to evict.
      * @since 2.0
      */
     void unpinAll(Collection oids);
 
-    /** Unpin the parameter instance from the second-level cache.
+    /**
+     * Unpin the parameter instance from the second-level cache.
+     * This is a hint only, and will be ignored if the underlying cache doesn't support it.
      * @param oids the object id of the instance to evict.
      * @since 2.0
      */
     void unpinAll(Object... oids);
     
-    /** Unpin instances from the second-level cache.
+    /**
+     * Unpin instances from the second-level cache.
+     * This is a hint only, and will be ignored if the underlying cache doesn't support it.
      * @param pcClass the class of instances to unpin
      * @param subclasses if true, unpin instances of subclasses also
      * @since 2.1
