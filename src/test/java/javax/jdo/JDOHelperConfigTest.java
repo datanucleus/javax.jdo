@@ -254,8 +254,7 @@ public class JDOHelperConfigTest extends AbstractJDOConfigTest implements Consta
             JDOCONFIG_CLASSPATH_PREFIX + "/Positive01/1a",
             JDOCONFIG_CLASSPATH_PREFIX + "/Positive01/1b" };
         URLClassLoader loader = new JDOConfigTestClassLoader(getClass().getClassLoader(), classpaths);
-        Map actual = JDOHelper.getPropertiesFromJdoconfig(
-            ANONYMOUS_PERSISTENCE_MANAGER_FACTORY_NAME, loader);
+        JDOHelper.getPropertiesFromJdoconfig(ANONYMOUS_PERSISTENCE_MANAGER_FACTORY_NAME, loader);
     }
 
     public void testPositive02_GetAnonymousPMFWithNoProperties()

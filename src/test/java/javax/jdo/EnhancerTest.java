@@ -323,6 +323,7 @@ public class EnhancerTest extends AbstractTest {
         Thread thread = new Thread(
                 new Runnable() {
                     public void run() {
+                        @SuppressWarnings("unused")
                         int count = 0;
                         int outputBytesRead = 0;
                         try {

@@ -298,9 +298,9 @@ public class XMLTestUtil {
 
         private String[] getLines() {
             if (lines == null) {
+                BufferedReader bufferedReader = null;
                 try {
-                    BufferedReader bufferedReader =
-                        new BufferedReader(new FileReader(fileUnderTest));
+                    bufferedReader = new BufferedReader(new FileReader(fileUnderTest));
                     ArrayList<String> tmp = new ArrayList<String>();
                     while (bufferedReader.ready()) {
                         tmp.add(bufferedReader.readLine());
@@ -308,6 +308,18 @@ public class XMLTestUtil {
                     lines = (String[])tmp.toArray(new String[tmp.size()]);
                 } catch (IOException ex) {
                     throw new JDOFatalException("getLines: caught IOException", ex);
+                } finally {
+                    if (bufferedReader != null) {
+                        try
+                        {
+                            bufferedReader.close();
+                        }
+                        catch (IOException e)
+                        {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
             return lines;
