@@ -29,6 +29,13 @@ public interface StringExpression extends ComparableExpression<String>
     StringExpression add(Expression expr);
 
     /**
+     * Method to return an expression for this string added to the passed expression (String concatenation).
+     * @param str The other string
+     * @return The summation
+     */
+    StringExpression add(String str);
+
+    /**
      * Method to return an expression for the character at a position of this string expression.
      * @param pos The position
      * @return Expression for the character
