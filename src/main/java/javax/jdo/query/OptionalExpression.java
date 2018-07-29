@@ -32,4 +32,11 @@ public interface OptionalExpression<T> extends ComparableExpression<java.util.Op
      * @return Whether there is an expression
      */
     BooleanExpression isPresent();
+
+    /**
+     * Accessor for the value expression (if present), otherwise return the other expression.
+     * @param other Other expression
+     * @return Return the value if present, otherwise return other
+     */
+    Expression<T> orElse(Expression<T> other);
 }
