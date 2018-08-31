@@ -28,6 +28,20 @@ import java.util.Map;
 public interface MapExpression<T extends Map<K, V>, K, V> extends Expression<T>
 {
     /**
+     * Method returning the value expression for a specified key expression.
+     * @param expr Key expression
+     * @return The value expression
+     */
+    Expression<V> get(Expression<K> expr);
+
+    /**
+     * Method returning the value expression for a specified key.
+     * @param key Key
+     * @return The value expression
+     */
+    Expression<V> get(K key);
+
+    /**
      * Method returning whether the specified key expression is contained in this map.
      * @param expr The key expression
      * @return Whether it is contained here
