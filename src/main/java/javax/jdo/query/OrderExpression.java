@@ -17,7 +17,7 @@
 package javax.jdo.query;
 
 /**
- * Expression representing the ordering using an expression and a direction.
+ * Expression representing the ordering using an expression, a direction, and how to treat nulls.
  * 
  * @param <T> Java type of the expression being represented here
  */
@@ -29,11 +29,35 @@ public interface OrderExpression<T>
         DESC
     }
 
+    public enum OrderNullsPosition
+    {
+        FIRST,
+        LAST
+    }
+
     /**
      * Accessor for the direction of the ordering with this expression.
      * @return The direction
      */
     OrderDirection getDirection();
+
+    /**
+     * Method to set nulls to be ordered BEFORE non-nulls.
+     * @return The order expression
+     */
+    OrderExpression<T> nullsFirst();
+
+    /**
+     * Method to set nulls to be ordered AFTER non-nulls.
+     * @return The order expression
+     */
+    OrderExpression<T> nullsLast();
+
+    /**
+     * Accessor for the position of nulls with this expression.
+     * @return The nulls position (or null if not defined)
+     */
+    OrderNullsPosition getNullsPosition();
 
     /**
      * Accessor for the expression being used for ordering.
