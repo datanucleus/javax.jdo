@@ -30,6 +30,7 @@ import javax.jdo.query.CollectionExpression;
 import javax.jdo.query.DateExpression;
 import javax.jdo.query.DateTimeExpression;
 import javax.jdo.query.Expression;
+import javax.jdo.query.IfElseExpression;
 import javax.jdo.query.ListExpression;
 import javax.jdo.query.MapExpression;
 import javax.jdo.query.NumericExpression;
@@ -141,6 +142,13 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param <V> type for the variable
      */
     <V> Expression<V> variable(String name, Class<V> type);
+
+    /**
+     * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
+     * @param type The type returned by the IfElse.
+     * @return The IfElse expression
+     */
+    <V> IfElseExpression<V> ifElseExpression(Class<V> type);
 
     /**
      * Method to set the candidates to use over which we are querying.
