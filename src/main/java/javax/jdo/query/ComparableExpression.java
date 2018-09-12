@@ -18,13 +18,6 @@ package javax.jdo.query;
 
 /**
  * Representation of an expression for a Java type that implements java.lang.Comparable.
- * Nore that the methods taking Expression as an argument could have been defined to take
- * ComparableExpression but that would then have prevented code like
- * <pre>
- * NumericExpression param = (NumericExpression)tq.parameter("criticalValue", Double.class);
- * tq.filter(cand.value.lt(param));
- * </pre>
- * and we would have had to cast the parameter to NumericExpression
  *
  * @param <T> Java type being represented here
  */
@@ -35,7 +28,7 @@ public interface ComparableExpression<T> extends Expression<T>
      * @param expr Other expression
      * @return Whether this is less than the other
      */
-    BooleanExpression lt(ComparableExpression<T> expr);
+    BooleanExpression lt(ComparableExpression<? extends T> expr);
 
     /**
      * Method returning whether this expression is less than the literal.
@@ -49,7 +42,7 @@ public interface ComparableExpression<T> extends Expression<T>
      * @param expr Other expression
      * @return Whether this is less than or equal the other
      */
-    BooleanExpression lteq(ComparableExpression<T> expr);
+    BooleanExpression lteq(ComparableExpression<? extends T> expr);
 
     /**
      * Method returning whether this expression is less than or equal the literal.
@@ -63,7 +56,7 @@ public interface ComparableExpression<T> extends Expression<T>
      * @param expr Other expression
      * @return Whether this is greater than the other
      */
-    BooleanExpression gt(ComparableExpression<T> expr);
+    BooleanExpression gt(ComparableExpression<? extends T> expr);
 
     /**
      * Method returning whether this expression is greater than the literal.
@@ -77,7 +70,7 @@ public interface ComparableExpression<T> extends Expression<T>
      * @param expr Other expression
      * @return Whether this is greater than or equal to the other
      */
-    BooleanExpression gteq(ComparableExpression<T> expr);
+    BooleanExpression gteq(ComparableExpression<? extends T> expr);
 
     /**
      * Method returning whether this expression is greater than or equal the literal.
