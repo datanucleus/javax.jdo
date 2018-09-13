@@ -22,7 +22,7 @@ package javax.jdo.query;
  * 
  * @param <T> Java type being returned here
  */
-public interface IfElseExpression<T> extends ComparableExpression<T>
+public interface IfThenElseExpression<T> extends ComparableExpression<T>
 {
     /**
      * Method to add an "IF (...) ..." clause.
@@ -31,7 +31,7 @@ public interface IfElseExpression<T> extends ComparableExpression<T>
      * @param value The return value
      * @return This expression
      */
-    IfElseExpression<T> ifThen(BooleanExpression ifExpr, T value);
+    IfThenElseExpression<T> when(BooleanExpression ifExpr, T value);
 
     /**
      * Method to add an "IF (...) ..." clause.
@@ -40,7 +40,7 @@ public interface IfElseExpression<T> extends ComparableExpression<T>
      * @param value The return value expression
      * @return This expression
      */
-    IfElseExpression<T> ifThen(BooleanExpression ifExpr, Expression<T> valueExpr);
+    IfThenElseExpression<T> when(BooleanExpression ifExpr, Expression<T> valueExpr);
 
     /**
      * Method to add the "ELSE ..." clause.
@@ -48,7 +48,7 @@ public interface IfElseExpression<T> extends ComparableExpression<T>
      * @param value The return value
      * @return This expression
      */
-    IfElseExpression<T> elseEnd(T value);
+    IfThenElseExpression<T> otherwise(T value);
 
     /**
      * Method to add the "ELSE ..." clause.
@@ -56,5 +56,5 @@ public interface IfElseExpression<T> extends ComparableExpression<T>
      * @param value The return value expression
      * @return This expression
      */
-    IfElseExpression<T> elseEnd(Expression<T> valueExpr);
+    IfThenElseExpression<T> otherwise(Expression<T> valueExpr);
 }

@@ -30,7 +30,7 @@ import javax.jdo.query.CollectionExpression;
 import javax.jdo.query.DateExpression;
 import javax.jdo.query.DateTimeExpression;
 import javax.jdo.query.Expression;
-import javax.jdo.query.IfElseExpression;
+import javax.jdo.query.IfThenElseExpression;
 import javax.jdo.query.ListExpression;
 import javax.jdo.query.MapExpression;
 import javax.jdo.query.NumericExpression;
@@ -146,9 +146,29 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
     /**
      * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
      * @param type The type returned by the IfElse.
-     * @return The IfElse expression
+     * @return The IfThenElse expression
      */
-    <V> IfElseExpression<V> ifElseExpression(Class<V> type);
+    <V> IfThenElseExpression<V> ifThenElse(Class<V> type);
+
+    /**
+     * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
+     * @param type The type returned by the IfElse.
+     * @param ifExpr If expression
+     * @param ifValue Value to return when the if expression is met
+     * @param elseValue Value to return when the if expression is not met
+     * @return The IfThenElse expression
+     */
+    <V> IfThenElseExpression<V> ifThenElse(Class<V> type, BooleanExpression ifExpr, V ifValue, V elseValue);
+
+    /**
+     * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
+     * @param type The type returned by the IfElse.
+     * @param ifExpr If expression
+     * @param ifValueExpr Expression for value to return when the if expression is met
+     * @param elseValueExpr Expression for value to return when the if expression is not met
+     * @return The IfThenElse expression
+     */
+    <V> IfThenElseExpression<V> ifThenElse(Class<V> type, BooleanExpression ifExpr, Expression<V> ifValueExpr, Expression<V> elseValueExpr);
 
     /**
      * Method to set the candidates to use over which we are querying.
