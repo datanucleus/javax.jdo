@@ -83,13 +83,13 @@ public interface ComparableExpression<T> extends Expression<T>
      * Method to return a numeric expression representing the aggregated minimum of this expression.
      * @return Numeric expression for the minimum
      */
-    NumericExpression<T> min();
+    ComparableExpression<T> min();
 
     /**
      * Method to return a numeric expression representing the aggregated maximum of this expression.
      * @return Numeric expression for the maximum
      */
-    NumericExpression<T> max();
+    ComparableExpression<T> max();
 
     /**
      * Method to return an order expression for this expression in ascending order.

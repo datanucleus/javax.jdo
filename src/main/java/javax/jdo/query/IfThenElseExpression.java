@@ -31,7 +31,7 @@ public interface IfThenElseExpression<T> extends ComparableExpression<T>
      * @param value The return value
      * @return This expression
      */
-    IfThenElseExpression<T> when(BooleanExpression ifExpr, T value);
+    IfThenElseExpression<T> ifThen(BooleanExpression ifExpr, T value);
 
     /**
      * Method to add an "IF (...) ..." clause.
@@ -40,7 +40,7 @@ public interface IfThenElseExpression<T> extends ComparableExpression<T>
      * @param value The return value expression
      * @return This expression
      */
-    IfThenElseExpression<T> when(BooleanExpression ifExpr, Expression<T> valueExpr);
+    IfThenElseExpression<T> ifThen(BooleanExpression ifExpr, Expression<T> valueExpr);
 
     /**
      * Method to add the "ELSE ..." clause.
@@ -48,7 +48,7 @@ public interface IfThenElseExpression<T> extends ComparableExpression<T>
      * @param value The return value
      * @return This expression
      */
-    IfThenElseExpression<T> otherwise(T value);
+    IfThenElseExpression<T> elseEnd(T value);
 
     /**
      * Method to add the "ELSE ..." clause.
@@ -56,5 +56,5 @@ public interface IfThenElseExpression<T> extends ComparableExpression<T>
      * @param value The return value expression
      * @return This expression
      */
-    IfThenElseExpression<T> otherwise(Expression<T> valueExpr);
+    IfThenElseExpression<T> elseEnd(Expression<T> valueExpr);
 }
