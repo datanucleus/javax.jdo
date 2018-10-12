@@ -38,6 +38,7 @@ import javax.jdo.query.OrderExpression;
 import javax.jdo.query.PersistableExpression;
 import javax.jdo.query.StringExpression;
 import javax.jdo.query.TimeExpression;
+import javax.jdo.query.geospatial.GeospatialHelper;
 
 /**
  * Interface for a type-safe refactorable JDOQL query, using a fluent API, based around expressions.
@@ -534,4 +535,10 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @return The single-string form of this query
      */
     String toString();
+
+    /**
+     * Accessor for a helper for (DataNucleus vendor extension) Geospatial helper methods.
+     * @return Geospatial helper
+     */
+    GeospatialHelper geospatialHelper();
 }

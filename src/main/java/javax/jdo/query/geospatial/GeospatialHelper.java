@@ -42,6 +42,22 @@ public interface GeospatialHelper
     GeometryExpression geometryFromText(String wkt, Integer srid);
 
     /**
+     * Construct a GeometryCollectionExpression given its text and SRID expressions.
+     * @param wktExpr well known text expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    GeometryCollectionExpression geometryCollFromText(StringExpression wktExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a GeometryCollectionExpression given its text and SRID values.
+     * @param wkt well known text
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    GeometryCollectionExpression geometryCollFromText(String wkt, Integer srid);
+
+    /**
      * Construct a PointExpression given its text and SRID expressions.
      * @param wktExpr well known text expression
      * @param sridExpr SRID expression
@@ -90,22 +106,6 @@ public interface GeospatialHelper
     PolygonExpression polygonFromText(String wkt, Integer srid);
 
     /**
-     * Construct a MultiLineStringExpression given its text and SRID expressions.
-     * @param wktExpr well known text expression
-     * @param sridExpr SRID expression
-     * @return The geometry expression
-     */
-    MultiLineStringExpression multiLineStringFromText(StringExpression wktExpr, NumericExpression<Integer> sridExpr);
-
-    /**
-     * Construct a MultiLineStringExpression given its text and SRID values.
-     * @param wkt well known text
-     * @param srid SRID
-     * @return The geometry expression
-     */
-    MultiLineStringExpression multiLineStringFromText(String wkt, Integer srid);
-
-    /**
      * Construct a MultiPointExpression given its text and SRID expressions.
      * @param wktExpr well known text expression
      * @param sridExpr SRID expression
@@ -120,6 +120,22 @@ public interface GeospatialHelper
      * @return The geometry expression
      */
     MultiPointExpression multiPointFromText(String wkt, Integer srid);
+
+    /**
+     * Construct a MultiLineStringExpression given its text and SRID expressions.
+     * @param wktExpr well known text expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    MultiLineStringExpression multiLineStringFromText(StringExpression wktExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a MultiLineStringExpression given its text and SRID values.
+     * @param wkt well known text
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    MultiLineStringExpression multiLineStringFromText(String wkt, Integer srid);
 
     /**
      * Construct a MultiPolygonExpression given its text and SRID expressions.
@@ -137,16 +153,5 @@ public interface GeospatialHelper
      */
     MultiPolygonExpression multiPolygonFromText(String wkt, Integer srid);
 
-/*
-    if ("Spatial.geomCollFromText".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromTextMethod3.class;
-
-    if ("Spatial.geomFromWKB".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromWKBMethod3.class;
-    if ("Spatial.geomCollFromWKB".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromWKBMethod3.class;                    
-    if ("Spatial.pointFromWKB".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromWKBMethod3.class;
-    if ("Spatial.mPointFromWKB".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromWKBMethod3.class;
-    if ("Spatial.lineFromWKB".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromWKBMethod3.class;
-    if ("Spatial.mLineFromWKB".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromWKBMethod3.class;
-    if ("Spatial.polyFromWKB".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromWKBMethod3.class;
-    if ("Spatial.mPolyFromWKB".equals(methodName)) return org.datanucleus.store.types.geospatial.rdbms.sql.method.SpatialGeomFromWKBMethod3.class;
-*/
+    // TODO Add equivalent from WKB
 }
