@@ -17,17 +17,11 @@ Contributors:
  **********************************************************************/
 package javax.jdo.query.geospatial;
 
-import javax.jdo.query.BooleanExpression;
-
 /**
- * Representation of a MultiLineString expression.
+ * Representation of a MultiPolygon expression.
  * Note that this is not part of the JDO spec, but a vendor extension to allow JDOQLTyped handling for geometry types.
  */
-public interface MultiLineStringExpression<T> extends GeometryCollectionExpression<T>
+public interface MultiPolygonExpression<T> extends GeometryCollectionExpression<T>
 {
-    /**
-     * Returns TRUE if this is closed, i.e., if StartPoint(Curve) = EndPoint(Curve).
-     * @return Whether it is closed
-     */
-    BooleanExpression isClosed();
+
 }
