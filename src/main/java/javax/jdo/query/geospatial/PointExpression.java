@@ -17,6 +17,8 @@ Contributors:
  **********************************************************************/
 package javax.jdo.query.geospatial;
 
+import javax.jdo.query.NumericExpression;
+
 /**
  * Representation of a point expression.
  * Note that this is not part of the JDO spec, but a vendor extension to allow JDOQLTyped handling for geometry types.
@@ -27,11 +29,11 @@ public interface PointExpression<T> extends GeometryExpression<T>
      * Returns the x-coordinate of the Point as a Double.
      * @return The x coordinate
      */
-    GeometryExpression getX();
+    NumericExpression<Double> getX();
 
     /**
      * Returns the y-coordinate of the Point as a Double.
      * @return The y coordinate
      */
-    GeometryExpression getY();
+    NumericExpression<Double> getY();
 }
