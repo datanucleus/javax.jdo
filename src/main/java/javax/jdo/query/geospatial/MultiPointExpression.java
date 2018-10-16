@@ -18,7 +18,7 @@ Contributors:
 package javax.jdo.query.geospatial;
 
 /**
- * Representation of a multi-point expression.
+ * Representation of a MultiPoint expression.
  * Note that this is not part of the JDO spec, but a vendor extension to allow JDOQLTyped handling for geometry types.
  */
 public interface MultiPointExpression<T> extends GeometryCollectionExpression<T>

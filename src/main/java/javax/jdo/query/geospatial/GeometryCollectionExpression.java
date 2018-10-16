@@ -18,7 +18,7 @@ Contributors:
 package javax.jdo.query.geospatial;
 
 /**
- * Representation of a geometry collection expression.
+ * Representation of a GeometryCollection expression.
  * Note that this is not part of the JDO spec, but a vendor extension to allow JDOQLTyped handling for geometry types.
  */
 public interface GeometryCollectionExpression<T> extends GeometryExpression<T>
