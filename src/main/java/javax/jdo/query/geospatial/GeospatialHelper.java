@@ -18,6 +18,7 @@ Contributors:
 package javax.jdo.query.geospatial;
 
 import javax.jdo.query.NumericExpression;
+import javax.jdo.query.ObjectExpression;
 import javax.jdo.query.StringExpression;
 
 /**
@@ -25,6 +26,8 @@ import javax.jdo.query.StringExpression;
  */
 public interface GeospatialHelper
 {
+    // From Well-Known-Text
+
     /**
      * Construct a GeometryExpression given its text and SRID expressions.
      * @param wktExpr well known text expression
@@ -153,5 +156,133 @@ public interface GeospatialHelper
      */
     MultiPolygonExpression multiPolygonFromText(String wkt, Integer srid);
 
-    // TODO Add equivalent from WKB
+    // From Well-Known-Binary
+
+    /**
+     * Construct a GeometryExpression given its text and SRID expressions.
+     * @param wkbExpr well known binary expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    GeometryExpression geometryFromWKB(ObjectExpression wkbExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a GeometryExpression given its text and SRID values.
+     * @param wkb well known binary
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    GeometryExpression geometryFromWKB(Object wkb, Integer srid);
+
+    /**
+     * Construct a GeometryCollectionExpression given its text and SRID expressions.
+     * @param wkbExpr well known binary expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    GeometryCollectionExpression geometryCollFromWKB(ObjectExpression wkbExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a GeometryCollectionExpression given its text and SRID values.
+     * @param wkb well known binary
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    GeometryCollectionExpression geometryCollFromWKB(Object wkb, Integer srid);
+
+    /**
+     * Construct a PointExpression given its text and SRID expressions.
+     * @param wkbExpr well known binary expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    PointExpression pointFromWKB(ObjectExpression wkbExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a PointExpression given its text and SRID values.
+     * @param wkb well known binary
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    PointExpression pointFromWKB(Object wkb, Integer srid);
+
+    /**
+     * Construct a LineStringExpression given its text and SRID expressions.
+     * @param wkbExpr well known binary expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    LineStringExpression lineStringFromWKB(ObjectExpression wkbExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a LineStringExpression given its text and SRID values.
+     * @param wkb well known binary
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    LineStringExpression lineStringFromWKB(Object wkb, Integer srid);
+
+    /**
+     * Construct a PolygonExpression given its text and SRID expressions.
+     * @param wkbExpr well known binary expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    PolygonExpression polygonFromWKB(ObjectExpression wkbExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a PolygonExpression given its text and SRID values.
+     * @param wkb well known binary
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    PolygonExpression polygonFromWKB(Object wkb, Integer srid);
+
+    /**
+     * Construct a MultiPointExpression given its text and SRID expressions.
+     * @param wkbExpr well known binary expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    MultiPointExpression multiPointFromWKB(ObjectExpression wkbExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a MultiPointExpression given its text and SRID values.
+     * @param wkb well known binary
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    MultiPointExpression multiPointFromWKB(Object wkb, Integer srid);
+
+    /**
+     * Construct a MultiLineStringExpression given its text and SRID expressions.
+     * @param wkbExpr well known binary expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    MultiLineStringExpression multiLineStringFromWKB(ObjectExpression wkbExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a MultiLineStringExpression given its text and SRID values.
+     * @param wkb well known binary
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    MultiLineStringExpression multiLineStringFromWKB(Object wkb, Integer srid);
+
+    /**
+     * Construct a MultiPolygonExpression given its text and SRID expressions.
+     * @param wkbExpr well known binary expression
+     * @param sridExpr SRID expression
+     * @return The geometry expression
+     */
+    MultiPolygonExpression multiPolygonFromWKB(ObjectExpression wkbExpr, NumericExpression<Integer> sridExpr);
+
+    /**
+     * Construct a MultiPolygonExpression given its text and SRID values.
+     * @param wkb well known binary
+     * @param srid SRID
+     * @return The geometry expression
+     */
+    MultiPolygonExpression multiPolygonFromWKB(Object wkb, Integer srid);
 }
