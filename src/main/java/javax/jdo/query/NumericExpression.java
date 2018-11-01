@@ -28,7 +28,7 @@ public interface NumericExpression<T> extends ComparableExpression<Number>
      * @param expr The other expression
      * @return The summation
      */
-    NumericExpression<T> add(Expression expr);
+    NumericExpression<T> add(Expression<T> expr);
 
     /**
      * Method to return an expression for this expression added to the passed number.
@@ -42,7 +42,7 @@ public interface NumericExpression<T> extends ComparableExpression<Number>
      * @param expr The other expression
      * @return The difference
      */
-    NumericExpression<T> sub(Expression expr);
+    NumericExpression<T> sub(Expression<T> expr);
 
     /**
      * Method to return an expression for this expression subtracting the passed number.
@@ -56,7 +56,7 @@ public interface NumericExpression<T> extends ComparableExpression<Number>
      * @param expr The other expression
      * @return The multiplication
      */
-    NumericExpression<T> mul(Expression expr);
+    NumericExpression<T> mul(Expression<T> expr);
 
     /**
      * Method to return an expression for this expression multiplied by the passed number.
@@ -70,7 +70,7 @@ public interface NumericExpression<T> extends ComparableExpression<Number>
      * @param expr The other expression
      * @return The division
      */
-    NumericExpression<T> div(Expression expr);
+    NumericExpression<T> div(Expression<T> expr);
 
     /**
      * Method to return an expression for this expression divided by the passed number.
@@ -84,7 +84,7 @@ public interface NumericExpression<T> extends ComparableExpression<Number>
      * @param expr The other expression
      * @return The modulus
      */
-    NumericExpression<T> mod(Expression expr);
+    NumericExpression<T> mod(Expression<T> expr);
 
     /**
      * Method to return an expression for this expression modulus the passed number.
@@ -112,10 +112,22 @@ public interface NumericExpression<T> extends ComparableExpression<Number>
     NumericExpression<Double> avg();
 
     /**
+     * Method to return a numeric expression representing the aggregated average of this distinct expression.
+     * @return Numeric expression for the average
+     */
+    NumericExpression<Double> avgDistinct();
+
+    /**
      * Method to return a numeric expression representing the aggregated sum of this expression.
      * @return Numeric expression for the sum
      */
     NumericExpression<T> sum();
+
+    /**
+     * Method to return a numeric expression representing the aggregated sum of this distinct expression.
+     * @return Numeric expression for the sum
+     */
+    NumericExpression<T> sumDistinct();
 
     /**
      * Method to return the absolute value expression of this expression.
