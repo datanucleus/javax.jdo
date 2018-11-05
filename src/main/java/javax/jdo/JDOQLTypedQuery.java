@@ -148,52 +148,39 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
      * @param type The type returned by the IfElse.
      * @param ifExpr If expression
-     * @param ifValue Value to return when the if expression is met
-     * @param elseValue Value to return when the if expression is not met
-     * @return The IfThenElse expression
-     * @param <V> Type of the result
-     */
-    <V> IfThenElseExpression<V> ifThenElse(Class<V> type, BooleanExpression ifExpr, V ifValue, V elseValue);
-
-    /**
-     * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
-     * @param type The type returned by the IfElse.
-     * @param ifExpr If expression
-     * @param ifValueExpr Expression for value to return when the if expression is met
+     * @param thenValueExpr Expression for value to return when the if expression is met
      * @param elseValueExpr Expression for value to return when the if expression is not met
      * @return The IfThenElse expression
      */
-    <V> IfThenElseExpression<V> ifThenElse(BooleanExpression ifExpr, Expression<V> ifValueExpr, Expression<V> elseValueExpr);
+    <V> IfThenElseExpression<V> ifThenElse(Class<V> type, BooleanExpression ifExpr, Expression<V> thenValueExpr, Expression<V> elseValueExpr);
 
     /**
      * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
-     * @param cond The if condition
+     * @param ifExpr If expression
      * @param thenValue Value to return when the if expression is met
-     * @param elseValueExpr Expression to return when the if expression is not met
+     * @param elseValueExpr Expression for value to return when the if expression is not met
      * @return The IfThenElse expression
-     * @param <V> Type of the result
      */
-    <V> IfThenElseExpression<V> ifThenElse(BooleanExpression cond, V thenValue, Expression<V> elseValueExpr);
+    <V> IfThenElseExpression<V> ifThenElse(BooleanExpression ifExpr, V thenValue, Expression<V> elseValueExpr);
 
     /**
      * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
-     * @param cond The if condition
-     * @param thenValueExpr Expression to return when the if expression is met
-     * @param elseValue Value to return when the if expression is not met
+     * @param ifExpr If expression
+     * @param thenValueExpr Expression for value to return when the if expression is met
+     * @param elseValue Expression for value to return when the if expression is not met
      * @return The IfThenElse expression
-     * @param <V> Type of the result
      */
-    <V> IfThenElseExpression<V> ifThenElse(BooleanExpression cond, Expression<V> thenValueExpr, V elseValue);
+    <V> IfThenElseExpression<V> ifThenElse(BooleanExpression ifExpr, Expression<V> thenValueExpr, V elseValue);
 
     /**
      * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
-     * @param cond The if condition
+     * @param ifExpr If expression
      * @param thenValue Value to return when the if expression is met
      * @param elseValue Value to return when the if expression is not met
      * @return The IfThenElse expression
      * @param <V> Type of the result
      */
-    <V> IfThenElseExpression<V> ifThenElse(BooleanExpression cond, V thenValue, V elseValue);
+    <V> IfThenElseExpression<V> ifThenElse(BooleanExpression ifExpr, V thenValue, V elseValue);
 
     /**
      * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
