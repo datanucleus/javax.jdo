@@ -24,6 +24,13 @@ package javax.jdo.query;
 public interface Expression<T>
 {
     /**
+     * Method to set the alias for this expression when used in the result clause. 
+     * @param alias The alias
+     * @return This expression
+     */
+    Expression<T> as(String alias);
+
+    /**
      * Method returning whether this expression equals the other expression.
      * @param expr Other expression
      * @return Whether they are equal
