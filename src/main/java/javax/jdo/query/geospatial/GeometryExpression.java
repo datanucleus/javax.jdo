@@ -141,6 +141,7 @@ public interface GeometryExpression<T> extends ComparableExpression<T>
 
     /**
      * TRUE if the spatial relationship specified by the pattern matrix holds
+     * @param geom The geometry to relate to
      * @param pattern The pattern matrix
      * @return Whether they relate
      */

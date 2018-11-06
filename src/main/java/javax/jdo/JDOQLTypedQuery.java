@@ -151,6 +151,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param thenValueExpr Expression for value to return when the if expression is met
      * @param elseValueExpr Expression for value to return when the if expression is not met
      * @return The IfThenElse expression
+     * @param <V> Type of the IfThenElseExpression
      */
     <V> IfThenElseExpression<V> ifThenElse(Class<V> type, BooleanExpression ifExpr, Expression thenValueExpr, Expression elseValueExpr);
 
@@ -160,6 +161,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param thenValue Value to return when the if expression is met
      * @param elseValueExpr Expression for value to return when the if expression is not met
      * @return The IfThenElse expression
+     * @param <V> Type of the IfThenElseExpression
      */
     <V> IfThenElseExpression<V> ifThenElse(BooleanExpression ifExpr, V thenValue, Expression<V> elseValueExpr);
 
@@ -169,6 +171,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param thenValueExpr Expression for value to return when the if expression is met
      * @param elseValue Expression for value to return when the if expression is not met
      * @return The IfThenElse expression
+     * @param <V> Type of the IfThenElseExpression
      */
     <V> IfThenElseExpression<V> ifThenElse(BooleanExpression ifExpr, Expression<V> thenValueExpr, V elseValue);
 
@@ -178,7 +181,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param thenValue Value to return when the if expression is met
      * @param elseValue Value to return when the if expression is not met
      * @return The IfThenElse expression
-     * @param <V> Type of the result
+     * @param <V> Type of the IfThenElseExpression
      */
     <V> IfThenElseExpression<V> ifThenElse(BooleanExpression ifExpr, V thenValue, V elseValue);
 
@@ -188,7 +191,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param cond The if condition
      * @param thenValueExpr Expression for value to return when the if expression is met
      * @return The IfThenElseExpression
-     * @param <V> Type of the result
+     * @param <V> Type of the IfThenElseExpression
      */
     <V> IfThenElseExpression<V> ifThen(Class<V> type, BooleanExpression cond, Expression<V> thenValueExpr);
 
@@ -197,7 +200,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param cond The if condition
      * @param thenValue Value to return when the if expression is met
      * @return The IfThenElseExpression
-     * @param <V> Type of the result
+     * @param <V> Type of the IfThenElseExpression
      */
     <V> IfThenElseExpression<V> ifThen(BooleanExpression cond, V thenValue);
 

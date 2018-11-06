@@ -37,7 +37,7 @@ public interface IfThenElseExpression<T> extends ComparableExpression<T>
      * Method to add an "IF (...) ..." clause.
      * If called multiple times, will add extra "IF (...) ..." or "ELSE IF (...) ..."
      * @param ifExpr The if expression
-     * @param value The return value expression
+     * @param valueExpr The return value expression
      * @return This expression
      */
     IfThenElseExpression<T> ifThen(BooleanExpression ifExpr, Expression<T> valueExpr);
@@ -53,7 +53,7 @@ public interface IfThenElseExpression<T> extends ComparableExpression<T>
     /**
      * Method to add the "ELSE ..." clause.
      * If called multiple times will replace the previous else clause
-     * @param value The return value expression
+     * @param valueExpr The return value expression
      * @return This expression
      */
     IfThenElseExpression<T> elseEnd(Expression<T> valueExpr);
