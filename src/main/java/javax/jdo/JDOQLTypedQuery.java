@@ -90,7 +90,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @param name Name of the parameter
      * @return NumericExpression for the parameter
      */
-    NumericExpression<?> numericParameter(String name);
+    NumericExpression<? extends Number> numericParameter(String name);
 
     /**
      * Method to return a date parameter for the query.
