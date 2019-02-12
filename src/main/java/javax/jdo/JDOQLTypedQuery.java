@@ -93,6 +93,15 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
     NumericExpression<? extends Number> numericParameter(String name);
 
     /**
+     * Method to return a numeric parameter for the query.
+     * @param type Type of the parameter
+     * @param name Name of the parameter
+     * @return NumericExpression for the parameter
+     * @param <N> Numeric type
+     */
+    <N extends Number> NumericExpression<N> numericParameter(Class<N> type, String name);
+
+    /**
      * Method to return a date parameter for the query.
      * @param name Name of the parameter
      * @return Expression for the parameter
@@ -121,6 +130,15 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
     CollectionExpression<?, ?> collectionParameter(String name);
 
     /**
+     * Method to return a collection parameter for the query.
+     * @param elementType type of the element of this collection
+     * @param name Name of the parameter
+     * @return Expression for the parameter
+     * @param <E> element type
+     */
+    <E> CollectionExpression<Collection<E>, E> collectionParameter(Class<E> elementType, String name);
+
+    /**
      * Method to return a map parameter for the query.
      * @param name Name of the parameter
      * @return Expression for the parameter
@@ -128,11 +146,31 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
     MapExpression<?, ?, ?> mapParameter(String name);
 
     /**
+     * Method to return a map parameter for the query.
+     * @param keyType Type for the key
+     * @param valueType Type for the value
+     * @param name Name of the parameter
+     * @return Expression for the parameter
+     * @param <K> Key type
+     * @param <V> Value type
+     */
+    <K,V> MapExpression<Map<K,V>, K, V> mapParameter(Class<K> keyType, Class<V> valueType, String name);
+
+    /**
      * Method to return a list parameter for the query.
      * @param name Name of the parameter
      * @return Expression for the parameter
      */
     ListExpression<?, ?> listParameter(String name);
+
+    /**
+     * Method to return a list parameter for the query.
+     * @param elementType type of the element of this list
+     * @param name Name of the parameter
+     * @return Expression for the parameter
+     * @param <E> element type
+     */
+    <E> ListExpression<List<E>, E> listParameter(Class<E> elementType, String name);
 
     /**
      * Method to return a variable for this query.
