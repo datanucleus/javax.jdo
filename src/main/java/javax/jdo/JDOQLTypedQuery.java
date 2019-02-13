@@ -94,12 +94,12 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
 
     /**
      * Method to return a numeric parameter for the query.
-     * @param type Type of the parameter
      * @param name Name of the parameter
+     * @param type Type of the parameter
      * @return NumericExpression for the parameter
      * @param <N> Numeric type
      */
-    <N extends Number> NumericExpression<N> numericParameter(Class<N> type, String name);
+    <N extends Number> NumericExpression<N> numericParameter(String name, Class<N> type);
 
     /**
      * Method to return a date parameter for the query.
@@ -131,12 +131,12 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
 
     /**
      * Method to return a collection parameter for the query.
-     * @param elementType type of the element of this collection
      * @param name Name of the parameter
+     * @param elementType type of the element of this collection
      * @return Expression for the parameter
      * @param <E> element type
      */
-    <E> CollectionExpression<Collection<E>, E> collectionParameter(Class<E> elementType, String name);
+    <E> CollectionExpression<Collection<E>, E> collectionParameter(String name, Class<E> elementType);
 
     /**
      * Method to return a map parameter for the query.
@@ -147,14 +147,14 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
 
     /**
      * Method to return a map parameter for the query.
+     * @param name Name of the parameter
      * @param keyType Type for the key
      * @param valueType Type for the value
-     * @param name Name of the parameter
      * @return Expression for the parameter
      * @param <K> Key type
      * @param <V> Value type
      */
-    <K,V> MapExpression<Map<K,V>, K, V> mapParameter(Class<K> keyType, Class<V> valueType, String name);
+    <K,V> MapExpression<Map<K,V>, K, V> mapParameter(String name, Class<K> keyType, Class<V> valueType);
 
     /**
      * Method to return a list parameter for the query.
@@ -165,12 +165,12 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
 
     /**
      * Method to return a list parameter for the query.
-     * @param elementType type of the element of this list
      * @param name Name of the parameter
+     * @param elementType type of the element of this list
      * @return Expression for the parameter
      * @param <E> element type
      */
-    <E> ListExpression<List<E>, E> listParameter(Class<E> elementType, String name);
+    <E> ListExpression<List<E>, E> listParameter(String name, Class<E> elementType);
 
     /**
      * Method to return a variable for this query.
