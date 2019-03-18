@@ -191,7 +191,7 @@ public interface JDOQLTypedQuery<T> extends Serializable, Closeable {
      * @return The IfThenElse expression
      * @param <V> Type of the IfThenElseExpression
      */
-    <V> IfThenElseExpression<V> ifThenElse(Class<V> type, BooleanExpression ifExpr, Expression thenValueExpr, Expression elseValueExpr);
+    <V> IfThenElseExpression<V> ifThenElse(Class<V> type, BooleanExpression ifExpr, Expression<V> thenValueExpr, Expression<V> elseValueExpr);
 
     /**
      * Method to return an "IF (...) ... ELSE ..." expression for use in this query.
