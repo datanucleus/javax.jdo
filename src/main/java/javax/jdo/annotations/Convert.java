@@ -35,7 +35,7 @@ import javax.jdo.AttributeConverter;
  * assignment-compatible with the {@link AttributeConverter}'s entity type argument.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
+@Target({ElementType.METHOD, ElementType.FIELD})
 public @interface Convert {
 
 	/**
