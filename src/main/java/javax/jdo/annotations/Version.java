@@ -23,13 +23,12 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation for the versioning of the class.
- * Corresponds to the xml element "version" of the "class" and "property" 
- * elements.
+ * Corresponds to the xml element "version" of the "class" and "property" elements.
  * 
  * @version 2.1
  * @since 2.1
  */
-@Target(ElementType.TYPE) 
+@Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD}) // DN Extension, allowing on FIELD/METHOD (JDO-683)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Version
 {
